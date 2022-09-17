@@ -1,5 +1,17 @@
 
+parameters:
+  
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'e8a176d7-6486-4189-9153-5fd813a62ee8'
 
+  # Web app name
+  webAppName: 'testaz400javaapp'
+
+  # Environment name
+  environmentName: 'testaz400javaapp'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
 stages:
   - stage: Build
@@ -8,7 +20,7 @@ stages:
       - job: MavenPackageAndPublishArtifacts
         displayName: Maven Package and Publish Artifacts
         pool:
-          vmImage: $(vmImageName)
+          vmImage: $({parameters.vmImageName})
 
         steps:
           - task: Maven@3
@@ -33,9 +45,9 @@ stages:
     jobs:
       - deployment: DeployLinuxWebApp
         displayName: Deploy Linux Web App
-        environment: $(environmentName)
+        environment: $({parameters.environmentName})
         pool:
-          vmImage: $(vmImageName)
+          vmImage: $({parameters.vmImageName})
         strategy:
           runOnce:
             deploy:
@@ -43,7 +55,7 @@ stages:
                 - task: AzureWebApp@1
                   displayName: 'Azure Web App Deploy: testaz400javaapp'
                   inputs:
-                    azureSubscription: $(azureSubscription)
+                    azureSubscription: $({parameters.azureSubscription})
                     appType: webAppLinux
-                    appName: $(webAppName)
+                    appName: $({parameters.webAppName})
                     package: '$(Pipeline.Workspace)/drop/**/target/*.?(war|jar)'
