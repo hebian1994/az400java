@@ -1,19 +1,19 @@
 
-parameters:
+  parameters:
   
   # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: ''
+    azureSubscription: ''
 
   # Web app name
-  webAppName: ''
+    webAppName: ''
 
   # Environment name
-  environmentName: ''
+    environmentName: ''
 
   # Agent VM image name
-  vmImageName: ''
+    vmImageName: ''
 
-stages:
+  stages:
   - stage: Build
     displayName: Build stage
     jobs:
