@@ -6,4 +6,5 @@
 trigger:
 - master
 
+steps:
 - template: ./test.yml
