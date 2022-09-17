@@ -1,7 +1,5 @@
 
-  parameters:
-  
-  # Azure Resource Manager connection created during pipeline creation
+parameters:
     azureSubscription: ''
 
   # Web app name
@@ -13,10 +11,10 @@
   # Agent VM image name
     vmImageName: ''
 
-  stages:
-  - stage: Build
-    displayName: Build stage
-    jobs:
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
       - job: MavenPackageAndPublishArtifacts
         displayName: Maven Package and Publish Artifacts
         pool:
@@ -38,11 +36,11 @@
           - upload: $(Build.ArtifactStagingDirectory)
             artifact: drop
 
-  - stage: Deploy
-    displayName: Deploy stage
-    dependsOn: Build
-    condition: succeeded()
-    jobs:
+- stage: Deploy
+  displayName: Deploy stage
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
       - deployment: DeployLinuxWebApp
         displayName: Deploy Linux Web App
         environment: $({parameters.environmentName})

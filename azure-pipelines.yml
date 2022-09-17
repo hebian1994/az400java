@@ -5,11 +5,14 @@
 
 trigger:
 - master
+pool:
+  vmImageName: 'ubuntu-latest'
 
 
 steps:
 - script: echo hello,world!
   displayName: '999999999999999999'
+
 - template: ./test.yml
   parameters:
     # Azure Resource Manager connection created during pipeline creation
