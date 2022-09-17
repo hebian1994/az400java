@@ -5,6 +5,19 @@
 
 trigger:
 - master
+variables:
+
+  # Azure Resource Manager connection created during pipeline creation
+  azureSubscription: 'e8a176d7-6486-4189-9153-5fd813a62ee8'
+
+  # Web app name
+  webAppName: 'testaz400javaapp'
+
+  # Environment name
+  environmentName: 'testaz400javaapp'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
 
 steps:
 - template: ./test.yml
