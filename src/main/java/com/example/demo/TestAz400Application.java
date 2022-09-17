@@ -17,7 +17,7 @@ public class TestAz400Application {
 
     @GetMapping("/")
     public String test1() {
-        String s = "666666666666666666666666666";
+        String s = "33333333333333333333333333333333";
         log.info(s);
         return s;
     }
